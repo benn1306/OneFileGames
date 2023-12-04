@@ -71,20 +71,20 @@ def win(r_pos,b_pos):
     
     #diagonal check (yikesssss this will be messy)
     for i in range(screen_width//100-3):
-        for j in range(screen_width//100-2):
+        for j in range(screen_height//100):
             if j in r_pos[i] and j+1 in r_pos[i+1] and j+2 in r_pos[i+2] and j+3 in r_pos[i+3]:
                 return True,False
     for i in range(screen_width//100-3):
-        for j in range(screen_width//100-2):
+        for j in range(screen_height//100):
             if j in b_pos[i] and j+1 in b_pos[i+1] and j+2 in b_pos[i+2] and j+3 in b_pos[i+3]:
                 return False,True
     #backwards diagonal cos you need a different check (aaaaa that took like 5 mins longer than it should have to figure out)
     for i in range(screen_width//100-3):
-        for j in range(screen_width//100,2,-1):
+        for j in range(screen_height//100,0,-1):
             if j in r_pos[i] and j-1 in r_pos[i+1] and j-2 in r_pos[i+2] and j-3 in r_pos[i+3]:
                 return True,False
     for i in range(screen_width//100-3):
-        for j in range(screen_width//100,2,-1):
+        for j in range(screen_height//100,0,-1):
             if j in b_pos[i] and j-1 in b_pos[i+1] and j-2 in b_pos[i+2] and j-3 in b_pos[i+3]:
                 return False,True
     
@@ -168,7 +168,7 @@ def game_loop():
         
         if end == True:
             font = pg.font.SysFont(None,30)
-            width_f,height_f = font.size("Press space to play again or escape to quit.")
+            width_f,h = font.size("Press space to play again or escape to quit.")
             
             txt = font.render("Press space to play again or escape to quit.",True,'gray70')
             screen.blit(txt,(screen_width//2 - width_f//2,screen_height-screen_width//8))
@@ -185,5 +185,6 @@ def game_loop():
         pg.display.update()
         clock.tick(60)
     pg.quit()
+
 while True:
     game_loop()
