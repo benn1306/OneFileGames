@@ -92,7 +92,7 @@ def game_loop():
                         else:
                             turn+=1
                 #what happens when they win or draw
-                elif x_win == False and o_win == False:
+                elif x_win == False and o_win == False and (len(played_list)>=9):
                     screen.fill('black')
                     screen.blit(draw_txt,(60,130))
                     screen.blit(cont_txt,(55,200))
