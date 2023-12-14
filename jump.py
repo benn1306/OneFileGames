@@ -122,8 +122,8 @@ def game_loop():
         for col in collumns:
             for c_object in col:
                 c_object.fall()
-                collision_detection(player,c_object,col)
-                if collision_detection(player,c_object,col) == False:
+                collision_detection(player,c_object)
+                if collision_detection(player,c_object) == False:
                     run = False
                 c_object.draw()
         
