@@ -1,11 +1,15 @@
 import pygame as pg
 import random 
 
+pg.init()
+
 screen_width,screen_height = 700,700
 screen = pg.display.set_mode((screen_width,screen_height))
 pg.display.set_caption('jump')
 clock = pg.time.Clock()
 
+global score
+score = 0
 
 class game_object:
     def __init__(self,collumn):
@@ -101,8 +105,13 @@ def collision_detection(player, game_object):
         else:
             player.falling_plat = False
 
-                
-#set screen up
+
+def show_score():
+    global score
+    font = pg.font.Font(None,30)
+    msg = font.render('Score:'+str(score),True,'white')
+    screen.blit(msg,(10,10))
+
 def screen_bg():
     screen.fill((84,190,193))
     for i in range(0,screen_width//100):
@@ -110,7 +119,7 @@ def screen_bg():
             pg.draw.rect(screen,(145,216,245),(i*100,0,100,screen_height))
       
 def game_loop():
-    global collumns
+    global collumns,score
     run = True
     collumns = [[]for i in range(0,screen_width//100)]
     player = Player()
@@ -125,6 +134,7 @@ def game_loop():
                 collision_detection(player,c_object)
                 if collision_detection(player,c_object) == False:
                     run = False
+                    score = 0
                 c_object.draw()
         
         player.draw_char()
@@ -136,6 +146,8 @@ def game_loop():
 
         if player.y <= 0:
             run = False
+            score += 1
+        show_score()
         pg.display.update()
         clock.tick(60)
 
